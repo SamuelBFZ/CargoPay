@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CargoPayAPI.DAL.Entities
 {
@@ -32,7 +33,8 @@ namespace CargoPayAPI.DAL.Entities
         public decimal Balance { get; set; }
 
         [Display (Name = "Payments")]
-        public ICollection<Payment> payments { get; set; }
+        [JsonIgnore]
+        public ICollection<Payment> payments { get; set; } = new List<Payment>();
 
     }
 }
