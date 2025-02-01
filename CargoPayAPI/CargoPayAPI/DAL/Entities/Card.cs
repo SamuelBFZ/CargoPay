@@ -27,5 +27,8 @@ namespace CargoPayAPI.DAL.Entities
         [Required(ErrorMessage = "Field {0} can´t be empty")]
         public string Brand { get; set; }
 
+        [Display (Name = "Payments")]
+        public ICollection<Payment> payments { get; set; }
+
     }
 }
