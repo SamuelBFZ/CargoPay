@@ -8,5 +8,6 @@ namespace CargoPayAPI.DAL.Context
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         public DbSet<Card> Cards { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }
