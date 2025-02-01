@@ -25,34 +25,20 @@ namespace CargoPayAPI.Repos.CardRepo
 
         public async Task<Card> CreateCardAsync(Card card)
         {
-            try
-            {
                 card.Id = Guid.NewGuid();
 
                 _context.Cards.Add(card);
                 await _context.SaveChangesAsync();
 
                 return card;
-
-            }catch(DbUpdateException ex)
-            {
-                throw new Exception(ex.InnerException?.Message ?? ex.Message);
-            }
         }
 
         public async Task<Card> UpdateCardAsync(Card card)
         {
-            try
-            {
                 _context.Cards.Update(card);
                 await _context.SaveChangesAsync();
 
                 return card;
-
-            }catch(DbUpdateException ex)
-            {
-                throw new Exception(ex.InnerException?.Message ?? ex.Message);
-            }
         }
 
         public async Task<Card> DeleteCardAsync(Guid id)
