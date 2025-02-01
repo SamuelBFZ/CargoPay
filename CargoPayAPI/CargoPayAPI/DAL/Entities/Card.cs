@@ -27,6 +27,10 @@ namespace CargoPayAPI.DAL.Entities
         [Required(ErrorMessage = "Field {0} can´t be empty")]
         public string Brand { get; set; }
 
+        [Display(Name = "Card Balance")]
+        [DataType(DataType.Currency)]
+        public decimal Balance { get; set; }
+
         [Display (Name = "Payments")]
         public ICollection<Payment> payments { get; set; }
 
