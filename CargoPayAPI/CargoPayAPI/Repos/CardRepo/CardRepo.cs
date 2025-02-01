@@ -52,6 +52,7 @@ namespace CargoPayAPI.Repos.CardRepo
             return card;
         }
 
+        //Im not sure if these methods better be in service
         public async Task<decimal> GetBalanceAsync(Guid id)
         {
             var card = await _context.Cards.FirstOrDefaultAsync(b => b.Id == id);

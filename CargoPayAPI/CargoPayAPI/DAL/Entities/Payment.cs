@@ -18,6 +18,6 @@ namespace CargoPayAPI.DAL.Entities
         public PaymentStatus Status { get; set; }
 
         [Display(Name = "Card Id")]
-        public Card Card { get; set; }
+        public Guid CardId { get; set; }
     }
 }
