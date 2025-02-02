@@ -55,39 +55,27 @@ namespace CargoPayAPI.Services.Services
 
         public async Task<Payment> PayAsync(Payment payment)
         {
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                try
-                {
-                    //Get Card
-                    var card = await _cardRepo.GetCardByIdAsync(payment.CardId);
-                    if (card == null) { throw new Exception("Card Id not found"); }
+            //Get Card
+            var card = await _cardRepo.GetCardByIdAsync(payment.CardId);
+            if (card == null) { throw new Exception("Card Id not found"); }
 
-                    //Verify Balance
-                    if (card.Balance < payment.Amount) { throw new Exception("Insufficient Balance"); }
+            //Verify Balance
+            if (card.Balance < payment.Amount) { throw new Exception("Insufficient Balance"); }
 
-                    //Get fee value
-                    decimal currentFee = _ufe.GetCurrentFee();
-                    decimal finalAmount = payment.Amount * currentFee;
+            //Get fee value
+            decimal currentFee = _ufe.GetCurrentFee();
+            decimal finalAmount = payment.Amount * currentFee;
 
-                    //Updtae card balance
-                    card.Balance -= finalAmount;
-                    await _cardRepo.UpdateCardAsync(card);
+            //Updtae card balance
+            card.Balance -= finalAmount;
+            await _cardRepo.UpdateCardAsync(card);
 
-                    //Create pay register
-                    payment.Amount = finalAmount;
-                    payment.Status = PaymentStatus.Pending;
-                    await _paymentRepo.CreatePayAsync(payment);
+            //Create pay register
+            payment.Amount = finalAmount;
+            payment.Status = PaymentStatus.Pending;
+            await _paymentRepo.CreatePayAsync(payment);
 
-                    return payment;
-                }
-                catch (Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            }
-
+            return payment;
         }
     }
 }

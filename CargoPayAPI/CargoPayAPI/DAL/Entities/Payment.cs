@@ -14,7 +14,6 @@ namespace CargoPayAPI.DAL.Entities
         public decimal Amount { get; set; }
 
         [Display(Name = "Payment Status")]
-        [Required(ErrorMessage = "Field {0} can´t be empty")]
         public PaymentStatus Status { get; set; }
 
         [Display(Name = "Card Id")]
