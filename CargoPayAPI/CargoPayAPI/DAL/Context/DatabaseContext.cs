@@ -9,5 +9,6 @@ namespace CargoPayAPI.DAL.Context
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
