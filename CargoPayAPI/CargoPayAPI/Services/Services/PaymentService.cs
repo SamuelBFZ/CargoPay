@@ -14,14 +14,12 @@ namespace CargoPayAPI.Services.Services
         private readonly IPaymentRepo _paymentRepo;
         private readonly ICardRepo _cardRepo;
         private readonly IUFE _ufe;
-        private readonly DatabaseContext _context;
 
-        public PaymentService(IPaymentRepo paymentRepo, ICardRepo cardRepo, IUFE ufe, DatabaseContext context)
+        public PaymentService(IPaymentRepo paymentRepo, ICardRepo cardRepo, IUFE ufe)
         {
             _paymentRepo = paymentRepo;
             _cardRepo = cardRepo;
             _ufe = ufe;
-            _context = context;
         }
 
         public async Task<Payment> CreatePayAsync(Payment payment)
