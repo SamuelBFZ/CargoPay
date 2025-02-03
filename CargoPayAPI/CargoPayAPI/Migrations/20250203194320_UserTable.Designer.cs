@@ -4,6 +4,7 @@ using CargoPayAPI.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CargoPayAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250203194320_UserTable")]
+    partial class UserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +57,7 @@ namespace CargoPayAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Cards", (string)null);
+                    b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("CargoPayAPI.DAL.Entities.Payment", b =>
@@ -79,7 +79,7 @@ namespace CargoPayAPI.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("CargoPayAPI.DAL.Entities.User", b =>
@@ -106,6 +106,9 @@ namespace CargoPayAPI.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -113,18 +116,9 @@ namespace CargoPayAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("CargoPayAPI.DAL.Entities.Card", b =>
-                {
-                    b.HasOne("CargoPayAPI.DAL.Entities.User", "User")
-                        .WithMany("cards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CargoPayAPI.DAL.Entities.Payment", b =>
@@ -136,6 +130,13 @@ namespace CargoPayAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CargoPayAPI.DAL.Entities.User", b =>
+                {
+                    b.HasOne("CargoPayAPI.DAL.Entities.User", null)
+                        .WithMany("users")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("CargoPayAPI.DAL.Entities.Card", b =>
                 {
                     b.Navigation("payments");
@@ -143,7 +144,7 @@ namespace CargoPayAPI.Migrations
 
             modelBuilder.Entity("CargoPayAPI.DAL.Entities.User", b =>
                 {
-                    b.Navigation("cards");
+                    b.Navigation("users");
                 });
 #pragma warning restore 612, 618
         }

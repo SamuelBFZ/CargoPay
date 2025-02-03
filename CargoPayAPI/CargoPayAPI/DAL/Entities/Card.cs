@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace CargoPayAPI.DAL.Entities
@@ -35,6 +36,9 @@ namespace CargoPayAPI.DAL.Entities
         [Display (Name = "Payments")]
         [JsonIgnore]
         public ICollection<Payment> payments { get; set; } = new List<Payment>();
+
+        [Display (Name = "Propietary")]
+        public Guid UserId { get; set; }
 
     }
 }

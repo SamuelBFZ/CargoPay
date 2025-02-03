@@ -1,5 +1,6 @@
 ﻿using CargoPayAPI.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CargoPayAPI.DAL.Entities
 {
@@ -18,8 +19,14 @@ namespace CargoPayAPI.DAL.Entities
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set;}
+
         public string RefreshToken { get; set;}
+
         public DateTime RefreshTokenExpiryTime { get; set;} 
         public UserRole Role { get; set;}
+
+        [Display (Name = "Cards")]
+        [JsonIgnore]
+        public ICollection<Card> cards { get; set; } = new List<Card>();
     }
 }

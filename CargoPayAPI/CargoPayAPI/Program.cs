@@ -2,6 +2,7 @@ using CargoPayAPI.DAL.Context;
 using CargoPayAPI.External_Services.UFE;
 using CargoPayAPI.Repos.CardRepo;
 using CargoPayAPI.Repos.PaymentRepo;
+using CargoPayAPI.Repos.UserRepo;
 using CargoPayAPI.Services.Interfaces;
 using CargoPayAPI.Services.Services;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICardRepo, CardRepo>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IPaymentRepo, PaymentRepo>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
