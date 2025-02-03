@@ -1,11 +1,13 @@
 ﻿using CargoPayAPI.DAL.Entities;
 using CargoPayAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CargoPayAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CardController : ControllerBase
     {
         private readonly ICardService _cardService;

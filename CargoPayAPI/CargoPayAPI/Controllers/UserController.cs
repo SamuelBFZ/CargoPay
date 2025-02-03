@@ -47,5 +47,24 @@ namespace CargoPayAPI.Controllers
 
             return Ok($"{deletedUser.Username} deleted");
         }
+
+        [HttpPost, ActionName("Authenticate")]
+        [Route("Authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] User user)
+        {
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.PasswordHash))
+            {
+                return BadRequest("Username and password are required");
+            }
+
+            var authResult = await _userService.AuthenticateAsync(user.Username, user.PasswordHash);
+
+            if (!authResult.Success)
+            {
+                return Unauthorized(authResult.Error);
+            }
+
+            return Ok(new { token = authResult.Token, refreshToken = authResult.RefreshToken });
+        }
     }
 }
