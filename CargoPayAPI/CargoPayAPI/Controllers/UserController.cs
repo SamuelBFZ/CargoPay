@@ -23,5 +23,29 @@ namespace CargoPayAPI.Controllers
             var createdUser = await _userService.CreateUserAsync(user);
             return Ok(createdUser);
         }
+
+        [HttpGet, ActionName("Get")]
+        [Route("Get/{id}")]
+        public async Task<ActionResult<User>> GetUserById(Guid id)
+        {
+            if (id == null) return BadRequest("Id necessary");
+
+            var user = await _userService.GetUserByIdAsync(id);
+
+            if (user == null) return NotFound($"ID {id} not found");
+
+            return Ok(user);
+        }
+
+        [HttpDelete, ActionName("Delete")]
+        [Route("Delete")]
+        public async Task<ActionResult> DeleteUserAsync(Guid id)
+        {
+            var deletedUser = await _userService.DeleteUserAsync(id);
+
+            if (deletedUser == null) return NotFound("User ID not found");
+
+            return Ok($"{deletedUser.Username} deleted");
+        }
     }
 }
