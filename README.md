@@ -2,8 +2,8 @@
 
 This project is an APIRest for a payment company, composed mainly of 3 parts.
 
-Pay Manager
-User Manager
+Pay Manager,
+User Manager,
 Card manager
 
 For this it was used a .net 6.0 application with EF core along with an n-layer architecture (for this case the model is 4 layers), along with an authentication system based on a JWT Bearer Token.
