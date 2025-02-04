@@ -26,9 +26,12 @@ There are also two extra folders, one called External Services where the externa
 
 ## The key points of the project are as follows:
 
-Endpoint Create Card: located in the card controller.
-Endpoint Pay: located in the payment controller.
-Endpoint Get Card Balance: located in the payment controller
+#### Endpoint Create Card: 
+located in the card controller.
+#### Endpoint Pay: 
+located in the payment controller.
+#### Endpoint Get Card Balance: 
+located in the payment controller
 
 The payment fee calculation logic is in the UFE service and is implemented in the Service for the Pay endpoint.
 
