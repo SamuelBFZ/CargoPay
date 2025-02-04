@@ -10,16 +10,16 @@ For this it was used a .net 6.0 application with EF core along with an n-layer a
 
 The model is distributed as follows:
 
-Presentation layer:
+#### Presentation layer:
 Controller Folder.
 
-Business layer:
+#### Business layer:
 Service Folder. This layer stores the services together with their interfaces.
 
-Data access layer:
+#### Data access layer:
 Repository folder
 
-Model layer:
+#### Model layer:
 DAL Folder. Here the entities are stored together with the database context.
 
 There are also two extra folders, one called External Services where the external services such as UFE are stored. The other is Models, where the Enums used for User and payment status are stored.
