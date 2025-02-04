@@ -24,7 +24,7 @@ DAL Folder. Here the entities are stored together with the database context.
 
 There are also two extra folders, one called External Services where the external services such as UFE are stored. The other is Models, where the Enums used for User and payment status are stored.
 
-##The key points of the project are as follows:
+## The key points of the project are as follows:
 
 Endpoint Create Card: located in the card controller.
 Endpoint Pay: located in the payment controller.
