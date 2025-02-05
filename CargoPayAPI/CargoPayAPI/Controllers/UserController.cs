@@ -1,4 +1,6 @@
 ﻿using CargoPayAPI.DAL.Entities;
+using CargoPayAPI.Models;
+using CargoPayAPI.Models.DTOs.User;
 using CargoPayAPI.Services.Interfaces;
 using CargoPayAPI.Services.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +20,32 @@ namespace CargoPayAPI.Controllers
 
         [HttpPost, ActionName("Create")]
         [Route("Create")]
-        public async Task<ActionResult<User>> CreateUserAsync(User user)
+        public async Task<ActionResult<User>> CreateUserAsync([FromBody] CreateUserDto createUserDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new User
+            {
+                Username = createUserDto.UserName,
+                Email = createUserDto.Email,
+                Role = (UserRole)createUserDto.Role,
+                PasswordHash = await _userService.HashPassword(createUserDto.PasswordHash),
+            };
+
             var createdUser = await _userService.CreateUserAsync(user);
-            return Ok(createdUser);
+
+            var userDto = new UserDto
+            {
+                Id = createdUser.Id,
+                Username = createdUser.Username,
+                Email = createdUser.Email,
+                Role = (int)createdUser.Role,
+            };
+
+            return Ok(userDto);
         }
 
         [HttpGet, ActionName("Get")]

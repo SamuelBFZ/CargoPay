@@ -10,5 +10,6 @@ namespace CargoPayAPI.Services.Interfaces
         Task<User> UpdateUserAsync(User user);
         Task<User> DeleteUserAsync(Guid id);
         Task<AuthenticationResult> AuthenticateAsync(string username, string password);
+        Task<string> HashPassword(string password);
     }
 }

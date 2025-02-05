@@ -24,7 +24,6 @@ namespace CargoPayAPI.Services.Services
         {
             try
             {
-                user.PasswordHash = HashPassword(user.PasswordHash);
                 return await _userRepo.CreateUserAsync(user);
             }
             catch (DbUpdateException exception)
@@ -34,9 +33,9 @@ namespace CargoPayAPI.Services.Services
 
         }
 
-        private string HashPassword(string password)
+        public async Task<string> HashPassword(string password)
         {
-            return BCrypt.Net.BCrypt.HashPassword(password);
+            return await Task.Run (() => BCrypt.Net.BCrypt.HashPassword(password));
         }
 
         private bool VerifyPasswordHash(string password, string passwordHash)
