@@ -74,14 +74,14 @@ namespace CargoPayAPI.Controllers
 
         [HttpPost, ActionName("Authenticate")]
         [Route("Authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] User user)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateUserDto authenticateUserDto)
         {
-            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.PasswordHash))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Username and password are required");
+                return BadRequest(ModelState);
             }
 
-            var authResult = await _userService.AuthenticateAsync(user.Username, user.PasswordHash);
+            var authResult = await _userService.AuthenticateAsync(authenticateUserDto.Username, authenticateUserDto.Password);
 
             if (!authResult.Success)
             {
