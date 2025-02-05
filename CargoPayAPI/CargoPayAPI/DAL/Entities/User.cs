@@ -20,9 +20,9 @@ namespace CargoPayAPI.DAL.Entities
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set;}
 
-        public string RefreshToken { get; set;}
+        public string? RefreshToken { get; set;}
 
-        public DateTime RefreshTokenExpiryTime { get; set;} 
+        public DateTime? RefreshTokenExpiryTime { get; set;} 
         public UserRole Role { get; set;}
 
         [Display (Name = "Cards")]
